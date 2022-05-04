@@ -44,10 +44,10 @@ class Sprite {
         c.fillRect(this.position.x, this.position.y, this.width, this.height)
 
         //This is where we draw the attackBox
-        //if(this.isAttacking){ 
+        if(this.isAttacking){ 
         c.fillStyle = '#52d053';
         c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height)
-        //}
+        }
     }
     update(){
         this.draw()
@@ -104,11 +104,7 @@ const enemy = new Sprite({
     }
 })
 
-
-
-
-console.log(player);
-
+//Create a constant for the 'button layout'
 const keys = {
     a: {
         pressed: false
@@ -130,8 +126,13 @@ const keys = {
     }
 }
 
+/*lastKey is a variable that shows which exact key was pressed
+in order to determine which buttons are needed to create 
+a combo. This is common practice is fighting games such as
+Smash or Street Fighter. In addition, lastKey makes the button
+input more precise*/
 let lastKey
-
+//Function that determines when an attack has landed on an oponent
 function rectangularCollision({rectangle1,rectangle2}){
     return (
         rectangle1.attackBox.position.x + rectangle1.attackBox.width >= 
@@ -140,7 +141,7 @@ function rectangularCollision({rectangle1,rectangle2}){
         && rectangle1.attackBox.position.y <= rectangle2.position.y + rectangle2.height  
     )
 }
-
+//Function to animate the characters on screen
 function animate() {
     window.requestAnimationFrame(animate)
     c.clearRect(0, 0 , canvas.width, canvas.height)
@@ -161,7 +162,7 @@ function animate() {
     }else if(keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight'){
         enemy.velocity.x = 4
     }
-    // Collision detection
+    //Collision detection for Player
     if(
         rectangularCollision({
             rectangle1: player, 
@@ -173,7 +174,7 @@ function animate() {
          player.isAttacking = false;
         console.log('player attack successful');
     }
-
+    //Collision detection for Enemy
     if(
         rectangularCollision({
             rectangle1: enemy, 
@@ -190,7 +191,6 @@ function animate() {
 animate();
 
 window.addEventListener('keydown', (event) => {
-    console.log(event.key);
     switch(event.key) {
         case 'd':
             keys.d.pressed = true
