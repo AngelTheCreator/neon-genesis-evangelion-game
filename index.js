@@ -22,8 +22,8 @@ class Sprite {
     constructor({position, velocity, color, offset}) {
         this.position = position
         this.velocity = velocity
-        this.width = 50
-        this.height = 150
+        this.width = 150 
+        this.height = 350
         this.lastKey 
         this.attackBox = {
             position: {
@@ -31,8 +31,8 @@ class Sprite {
                 y:this.position.y
             },
             offset,
-            width: 100 ,
-            height: 50 
+            width: 300 ,
+            height: 50   
         }
         this.color = color
         this.isAttacking
@@ -100,7 +100,7 @@ const enemy = new Sprite({
     },
     color: 'grey',
     offset: {
-        x: -50,
+        x: -150,
         y:0
     }
 })
